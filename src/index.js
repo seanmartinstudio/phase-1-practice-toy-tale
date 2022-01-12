@@ -25,11 +25,17 @@ rendertoyObjects()
 }
 init()
 
-//Render toy objects to DOM
+//RENDER TOY OBJECT TO DOM//
 function rendertoyObjects(toys) {
-const toyCard = document.createElement('div')
-toyCard.id = `toy-${toys.id}`
-console.log(toyCard)
+let toyCard = document.createElement('div')
+// toyCard.id = `toy-${toys.id}` --- bug trying to create ID's
+toyCard.className = 'card'
+const toyCollection = document.getElementById('toy-collection')
+toyCollection.appendChild(toyCard)
+
+let toyCardH2 = document.createElement('h2')
+toyCardH2.textContent = `${toys.name}`
+console.log(toyCardH2)
 }
 
 
