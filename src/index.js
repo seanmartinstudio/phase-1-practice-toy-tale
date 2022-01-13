@@ -21,21 +21,41 @@ const toyObjectURL = 'http://localhost:3000/toys'
 //Initialize Function to envoke all other functions
 function init() {
 getToyObjects()
-rendertoyObjects()
+// rendertoyObjects()
 }
 init()
 
 //RENDER TOY OBJECT TO DOM//
 function rendertoyObjects(toys) {
+
+//Create 'div' tag with toy card container
 let toyCard = document.createElement('div')
-// toyCard.id = `toy-${toys.id}` --- bug trying to create ID's
 toyCard.className = 'card'
 const toyCollection = document.getElementById('toy-collection')
 toyCollection.appendChild(toyCard)
 
-let toyCardH2 = document.createElement('h2')
-toyCardH2.textContent = `${toys.name}`
-console.log(toyCardH2)
+//Create 'h1' tag
+let toyH2 = document.createElement('h2')
+toyH2.textContent = `${toys.name}`
+toyCard.appendChild(toyH2)
+
+//Create 'img' tag
+let toyImg = document.createElement('img')
+toyImg.src = `${toys.image}`
+toyImg.className = 'toy-avatar'
+toyCard.appendChild(toyImg)
+
+//Creatie 'p' tag
+let toyP = document.createElement('p')
+toyP.textContent = `${toys.likes} Likes`
+toyCard.appendChild(toyP)
+
+//Create 'button' tag
+let toyButton = document.createElement('button')
+toyButton.className = 'like-btn'
+toyButton.id = `toy-${toys.id}`
+toyButton.innerText = 'Like ❤️'
+toyCard.appendChild(toyButton)
 }
 
 
@@ -49,5 +69,4 @@ fetch(toyObjectURL)
 }
 
 
-//To Do: Continue building out toy div cards in renderToyObjects function,
-//next step is to deal with bug at line 31 and then create the class for each card.
+//To Do: start building out event listeners and form, etc.
