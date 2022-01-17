@@ -64,8 +64,12 @@ function rendertoyObjects(toys) {
   toyButton.className = 'like-btn'
   toyButton.id = `toy-${toys.id}`
   toyButton.textContent = 'Like ❤️'
-  // toyButton.addEventListener('click', (event) => {console.log(toys)}) //come back to this for like button
   toyCard.appendChild(toyButton)
+
+  toyButton.addEventListener('click', () => {
+    patchLikes(toys, toyButton, toyP)
+
+  })
 }
 
 
@@ -78,7 +82,7 @@ function getToyObjects() {
     })
 }
 
-//POST TOY OBJECTS TO SERVER AND ADD TO DOM
+
 function postToy(toyName, toyImg) {
 
   const newToy = {
@@ -91,7 +95,7 @@ function postToy(toyName, toyImg) {
 
     method: 'POST',
     headers: {
-      'Conent-Type': 'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       
     },
@@ -99,9 +103,23 @@ function postToy(toyName, toyImg) {
   })
 
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => rendertoyObjects(data))
 
 }
 
-//To Do: start building out event listeners and form, etc.
+//PATCH TO UPDATE LIKES
+function patchLikes(toys, toyButton, toyP) {
+  ++toys.likes
+  toyP.innerText = `${toys.likes} Likes`
+
+  fetch(`http://localhost:3000/toys/${toys.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({likes: toys.likes})
+  })
+}
+
 
