@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const toyObjectURL = 'http://localhost:3000/toys'
 
 
-//Initialize Function to envoke all other functions
+//INIT FUNCTIONS
 function init() {
   getToyObjects()
 }
@@ -40,6 +40,7 @@ function rendertoyObjects(toys) {
   //Create 'div' tag with toy card container
   let toyCard = document.createElement('div')
   toyCard.className = 'card'
+  toyCard.id = toys.id
   const toyCollection = document.getElementById('toy-collection')
   toyCollection.appendChild(toyCard)
 
@@ -59,12 +60,31 @@ function rendertoyObjects(toys) {
   toyP.textContent = `${toys.likes} Likes`
   toyCard.appendChild(toyP)
 
+  //Create delete button
+  let deleteButton = document.createElement('button')
+  deleteButton.id = toys.id
+  deleteButton.innerText = 'Delete'
+  deleteButton.addEventListener('click', () => {
+    
+    fetch(toyObjectURL + '/' + toys.id, {
+      
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then( () => {
+      document.getElementById(toys.id).remove()
+    })
+  })
+
   //Create 'button' tag
   let toyButton = document.createElement('button')
   toyButton.className = 'like-btn'
   toyButton.id = `toy-${toys.id}`
   toyButton.textContent = 'Like ❤️'
-  toyCard.appendChild(toyButton)
+  toyCard.append(toyButton, deleteButton)
 
   toyButton.addEventListener('click', () => {
     patchLikes(toys, toyButton, toyP)
@@ -73,7 +93,7 @@ function rendertoyObjects(toys) {
 }
 
 
-//FETCH TOY OBJECTS FROM SERVER
+//POST TOY OBJECTS FROM SERVER
 function getToyObjects() {
   fetch(toyObjectURL)
     .then(res => res.json())

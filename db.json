@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 6
+      "likes": 7
     },
     {
       "id": 2,
@@ -206,18 +206,6 @@
     },
     {
       "id": 61
-    },
-    {
-      "name": "Sean Martin",
-      "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": 0,
-      "id": 62
-    },
-    {
-      "name": "Jesse",
-      "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": 0,
-      "id": 63
     }
   ]
 }
